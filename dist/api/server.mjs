@@ -13,5 +13,5 @@ app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on ${process.env.BACKEND_API_URL}:${PORT}`);
 });

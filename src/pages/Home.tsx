@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         try {
           const transactionsData = await fetchData(
-            `http://localhost:5000/api/transactions/${accountId}`
+            `${process.env.BACKEND_API_URL}/api/transactions/${accountId}`
           );
           setTransactions(transactionsData);
         } catch (err) {
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         try {
           const response = await fetchData(
-            `http://localhost:5000/api/users/${accountId}/balance`
+            `${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`
           );
           setBalance(response.balance);
         } catch (err) {
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/transactions", {
+      const response = await fetch(`${process.env.BACKEND_API_URL}/api/transactions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -145,7 +145,7 @@ const Home: React.FC = () => {
 
       // refetch balance
       const balanceResponse = await fetch(
-        `http://localhost:5000/api/users/${accountId}/balance`
+        `${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`
       );
       const balanceData = await balanceResponse.json();
       setBalance(balanceData.balance);

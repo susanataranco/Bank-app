@@ -1,7 +1,7 @@
 export async function fetchAccountId(email: string, clerkId: string, setIsLoading: (loading: boolean) => void): Promise<number | null> {
   try {
     setIsLoading(true);
-    const response = await fetch("http://localhost:5000/api/users", {
+    const response = await fetch(`${process.env.BACKEND_API_URL}/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
