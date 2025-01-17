@@ -1,111 +1,177 @@
-# Transaction Management Frontend - Level 2
+# Transaction Management System
 
-Below, you'll find the instructions for getting started with your task. Please read them carefully to avoid unexpected issues. Best of luck!
+A full-stack web application for managing user accounts, balances, and transactions (deposits, withdrawals, and transfers) with a responsive design and secure user authentication.
 
-## Time estimate
+## Features
 
-Between 2 and 3 hours, plus the time to set up the codebase.
+### **User Management**
+- User authentication using Clerk (e.g., Google Sign-In, ClerkID).
+- Unique custom account IDs for users in the format `XXX-00000000`.
 
-## Mandatory steps before you get started
+### **Transaction Management**
+- Deposit, withdrawal, and transfer funds between accounts.
+- Auto-updated account balances.
+- Transaction history with detailed descriptions (e.g., "Transfer to XXX-00000000").
 
-1. You should already have your project setup from the coding test start page but if not check out [this guide here](https://help.alvalabs.io/en/articles/9028914-how-to-set-up-the-codebase-for-your-coding-test) for more information.
-2. Learn [how to get help](https://help.alvalabs.io/en/articles/9028899-how-to-ask-for-help-with-coding-tests) if you run into an issue with your coding test.
+### **Frontend**
+- Built with React and TypeScript.
+- Responsive design using Tailwind CSS.
+- UI components powered by ShadCN.
+- Toast notifications for success and error alerts.
 
-## The task
+### **Backend**
+- RESTful API built with Express.js.
+- Database management with Prisma ORM.
+- PostgreSQL for storing user and transaction data.
 
-<!--TASK_INSTRUCTIONS_START-->
-Your task is to build a frontend app that allows the recording of financial transactions and viewing the transaction history by connecting to a hosted Transaction Management API.
-
-### Frontend requirements
-
-The transaction list must display the withdrawn or deposited amount for each transaction, along with the affected account ID. It must also render the current balance for the last submitted transaction.
-
-Here's the UI mockup with hints:
-
-![Transaction Management App Frontend](https://user-images.githubusercontent.com/450319/139797772-4e4b2744-447c-411f-9b04-7028ba5e89a1.png)
-
-Feel free to tweak the UI, but please ensure that the following HTML is in place.
-
-#### The form for submitting transactions
-
-```html
-<form ... >
-  <input data-type="account-id" ... />
-  <input data-type="amount" ... />
-  <input data-type="transaction-submit" type="submit" ... />
-</form>
-```
-
-Both input **fields should be cleared** after the form is submitted.
-
-#### Transactions list
-
-Every newly submitted transaction should go on **the top of the list** and should have an enclosing `<div />` with the following structure:
-
-```html
-<div 
-  data-type="transaction"
-  data-account-id="${transaction-account-id}"
-  data-amount="${transaction-amount}"
-  data-balance="${current-account-balance}" ...>
-  ...
-</div>
-```
-
-- `${transaction-account-id}` - account id of the corresponding transaction.
-- `${transaction-amount}` - transaction amount.
-- `${current-account-balance}` - the current account balance right after submitting the transaction (only show for the last submitted transaction).
-
-### The API to integrate with
-
-<details>
-<summary>Untoggle to see request examples</summary>
-
-##### Get historical transactions
-
-```
-GET https://infra.devskills.app/api/accounting/transactions
-```
-
-##### Create a new transaction
-
-```
-POST https://infra.devskills.app/api/accounting/transaction
-Content-Type: application/json
-
-{
-  "account_id": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2",
-  "amount": 7
-}
-```
-
-##### Get a transaction by id
-
-```
-GET https://infra.devskills.app/api/accounting/transactions/7c94635a-40a3-4c87-888a-42c3ce5b9750
-```
-
-##### Get an account by id
-```
-GET https://infra.devskills.app/api/accounting/accounts/0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2
-```
-
-</details>
-
-### Solution expectations
-
-- Do your best to make the [provided E2E tests](cypress/e2e/test.cy.js) pass. Check out [this tutorial](https://help.alvalabs.io/en/articles/9028831-how-to-work-with-cypress) to learn how to execute these tests and analyze the results.
-- Implement client-side validation of the form data.
-- Implement error handling for the cases when the API cannot be reached or returns a server error.
-- Unit test one module of choice. There is no need to test the whole app, as we only want to understand what you take into consideration when writing unit tests.
-- Avoid duplication and extract re-usable modules where it makes sense. We want to see your approach to creating a codebase that is easy to maintain.
-
-<!--TASK_INSTRUCTIONS_END-->
-## When you are done
-
-1. [Create a new Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from the branch where you've committed your solution to the default branch of this repository. **Please do not merge the created Pull Request**.
-2. Go to your application in [Alva Labs](https://app.alvalabs.io) and submit your test.
+### **Deployment**
+- Frontend hosted on **Vercel**.
+- Backend API and database hosted on **Railway**.
 
 ---
 
-Authored by [Alva Labs](https://www.alvalabs.io/).
+## Tech Stack
+
+### **Frontend**
+- **React**: For building the UI.
+- **TypeScript**: For type safety and improved development experience.
+- **Tailwind CSS**: For utility-first, responsive styling.
+- **ShadCN UI**: Prebuilt customizable UI components.
+- **React Router**: For managing navigation.
+- **Cypress**: End-to-end testing.
+
+### **Backend**
+- **Express.js**: For API routes and server-side logic.
+- **Prisma**: ORM for database interactions.
+- **PostgreSQL**: Relational database.
+- **TypeScript**: Type-safe backend development.
+
+### **DevOps**
+- **Vercel**: Hosting for the frontend.
+- **Railway**: Hosting for the backend API and database.
+
+---
+
+## Installation and Setup
+
+### **Prerequisites**
+- Node.js installed.
+- PostgreSQL database set up.
+- Environment variables configured (e.g., Clerk keys, database URL).
+
+### **Steps**
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-repo.git
+   cd your-repo
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up the environment variables:**
+   Create a `.env` file in the root directory with the following variables:
+   ```env
+   DATABASE_URL=your_postgresql_url
+   CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   ```
+
+4. **Run database migrations:**
+   ```bash
+   npx prisma migrate dev
+   ```
+
+5. **Start the backend server:**
+   ```bash
+   npm run start:backend
+   ```
+
+6. **Start the frontend application:**
+   ```bash
+   npm start
+   ```
+
+---
+
+## API Endpoints
+
+### **User Routes**
+- `POST /api/users`: Create or fetch a user.
+- `GET /api/users/:accountId/balance`: Get the balance for a specific user.
+
+### **Transaction Routes**
+- `GET /api/transactions/:accountId`: Fetch transaction history for a user.
+- `POST /api/transactions`: Add a new transaction (deposit, withdrawal, or transfer).
+
+---
+
+## Project Structure
+
+```
+.
+├── api
+│   ├── routes
+│   │   ├── userRoutes.ts
+│   │   ├── transactionRoutes.ts
+│   ├── server.mts
+├── src
+│   ├── components
+│   │   ├── ui
+│   │   │   ├── button.tsx
+│   │   │   ├── toast.tsx
+│   ├── contexts
+│   │   ├── LoadingContext.tsx
+│   ├── hooks
+│   │   ├── useFetch.ts
+│   │   ├── useAccountId.tsx
+│   │   ├── use-toast.tsx
+│   ├── pages
+│   │   ├── Home.tsx
+│   ├── App.tsx
+│   ├── index.tsx
+├── prisma
+│   ├── schema.prisma
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## Deployment
+
+### **Frontend (Vercel)**
+1. Push your frontend code to a GitHub repository.
+2. Connect the repository to Vercel.
+3. Set the environment variables in Vercel settings (e.g., `CLERK_PUBLISHABLE_KEY`).
+4. Deploy the app.
+
+### **Backend (Railway)**
+1. Push your backend code to a GitHub repository.
+2. Connect the repository to Railway.
+3. Set the environment variables in Railway settings (e.g., `DATABASE_URL`, `CLERK_SECRET_KEY`).
+4. Deploy the API and database.
+
+---
+
+## Troubleshooting
+
+- **Missing Environment Variables:** Ensure all required variables are set up in `.env`.
+- **Database Issues:** Check PostgreSQL logs and Prisma migrations.
+- **CORS Errors:** Update CORS configuration in the backend if accessing from a different domain.
+
+---
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+## Contributing
+Feel free to fork this project and submit pull requests! If you find any issues, please open an issue in the GitHub repository.
+
