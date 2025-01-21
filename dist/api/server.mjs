@@ -5,9 +5,11 @@ import userRoutes from "./routes/userRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 console.log(`Starting server in ${process.env.NODE_ENV} mode`);
 console.log(`Memory Limit: ${process.env.NODE_OPTIONS}`);
-const allowedOrigins = ["*"];
+const allowedOrigins = process.env.NODE_ENV === "production"
+    ? ["https://bank-app-production-b9b8.up.railway.app"]
+    : ["http://localhost:3000"];
 const BACKEND_API_URL = process.env.NODE_ENV === "production"
-    ? "bank-app-production-b9b8.up.railway.app"
+    ? "https://bank-app-production-b9b8.up.railway.app/api/users"
     : "http://localhost:5000";
 const app = express();
 const PORT = process.env.PORT || 5000;
