@@ -4,11 +4,12 @@ import bodyParser from "body-parser";
 import userRoutes from "./routes/userRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 
-const allowedOrigins = [
-  "https://bank-app-gamma-three.vercel.app/",
-  "http://localhost:3000",
-  "https://api.postman.com",
-];
+const allowedOrigins = ["*"];
+
+const BACKEND_API_URL =
+process.env.NODE_ENV === "production"
+  ? "bank-app-production-b9b8.up.railway.app"
+  : "http://localhost:5000";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,5 +27,5 @@ app.use("/api/transactions", transactionRoutes);
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on ${process.env.BACKEND_API_URL}:${PORT}`);
+  console.log(`Server running on ${BACKEND_API_URL}`);
 });

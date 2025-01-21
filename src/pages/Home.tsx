@@ -30,6 +30,11 @@ const Home: React.FC = () => {
 
   const { user } = useUser();
 
+  const BACKEND_API_URL =
+  process.env.NODE_ENV === "production"
+    ? "bank-app-production-b9b8.up.railway.app"
+    : "http://localhost:5000";
+
   // Fetch account ID
   useEffect(() => {
     if (user?.primaryEmailAddress?.emailAddress) {
@@ -64,7 +69,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         try {
           const transactionsData = await fetchData(
-            `${process.env.BACKEND_API_URL}/api/transactions/${accountId}`
+            `${BACKEND_API_URL}/api/transactions/${accountId}`
           );
           setTransactions(transactionsData);
         } catch (err) {
@@ -85,7 +90,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         try {
           const response = await fetchData(
-            `${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`
+            `${BACKEND_API_URL}/api/users/${accountId}/balance`
           );
           setBalance(response.balance);
         } catch (err) {
@@ -118,7 +123,7 @@ const Home: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.BACKEND_API_URL}/api/transactions`, {
+      const response = await fetch(`${BACKEND_API_URL}/api/transactions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -145,7 +150,7 @@ const Home: React.FC = () => {
 
       // refetch balance
       const balanceResponse = await fetch(
-        `${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`
+        `${BACKEND_API_URL}/api/users/${accountId}/balance`
       );
       const balanceData = await balanceResponse.json();
       setBalance(balanceData.balance);
