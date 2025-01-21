@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "webpack serve --config webpack.config.mjs --mode development",
-    "start:backend": "NODE_OPTIONS='--max-old-space-size=256' tsc && node dist/api/server.mjs",
+    "start:backend": "NODE_OPTIONS='--max-old-space-size=512' tsc && node dist/api/server.mjs",
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "webpack --config webpack.config.mjs --mode production",
     "build:backend": "tsc",
