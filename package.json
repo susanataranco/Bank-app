@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "NODE_OPTIONS='--max-old-space-size=1024' webpack serve --config webpack.config.mjs --mode development",
-    "start:backend": "NODE_OPTIONS='--max-old-space-size=1024' tsc && node dist/api/server.mjs",
+    "start": "NODE_OPTIONS='--max-old-space-size=1024' tsc && node dist/api/server.mjs",
+    "start:frontend": "NODE_OPTIONS='--max-old-space-size=1024' webpack serve --config webpack.config.mjs --mode development",
     "build": "NODE_OPTIONS='--max-old-space-size=1024' npm run build:frontend && npm run build:backend",
     "build:frontend": "webpack --config webpack.config.mjs --mode production",
     "build:backend": "tsc",
