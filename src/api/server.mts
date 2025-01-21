@@ -4,6 +4,9 @@ import bodyParser from "body-parser";
 import userRoutes from "./routes/userRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 
+console.log(`Starting server in ${process.env.NODE_ENV} mode`);
+console.log(`Memory Limit: ${process.env.NODE_OPTIONS}`);
+
 const allowedOrigins = ["*"];
 
 const BACKEND_API_URL =
