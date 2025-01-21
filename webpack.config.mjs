@@ -44,5 +44,7 @@ export default {
     static: path.join(__dirname, 'dist'),
     port: 3000,
     historyApiFallback: true,
+    host: "0.0.0.0",
+    allowedHosts: "all",
   },
 };
