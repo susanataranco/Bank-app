@@ -13,6 +13,7 @@ import {
 } from "../components/ui/select"
 import { Input } from "../components/ui/input"
 import { Button } from "../components/ui/button"
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://bank-app-production-b9b8.up.railway.app";
 
 
 const Home: React.FC = () => {
@@ -64,7 +65,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         try {
           const transactionsData = await fetchData(
-            `${process.env.BACKEND_API_URL}/api/transactions/${accountId}`
+            `${API_BASE_URL}/api/transactions/${accountId}`
           );
           setTransactions(transactionsData);
         } catch (err) {
@@ -85,7 +86,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         try {
           const response = await fetchData(
-            `${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`
+            `${API_BASE_URL}/api/users/${accountId}/balance`
           );
           setBalance(response.balance);
         } catch (err) {
@@ -118,7 +119,7 @@ const Home: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.BACKEND_API_URL}/api/transactions`, {
+      const response = await fetch(`${API_BASE_URL}/api/transactions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -145,7 +146,7 @@ const Home: React.FC = () => {
 
       // refetch balance
       const balanceResponse = await fetch(
-        `${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`
+        `${API_BASE_URL}/api/users/${accountId}/balance`
       );
       const balanceData = await balanceResponse.json();
       setBalance(balanceData.balance);

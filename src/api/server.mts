@@ -11,6 +11,7 @@ const allowedOrigins = [
   "https://bank-app-gamma-three.vercel.app",
   "https://bank-app-production-b9b8.up.railway.app"
 ];
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://bank-app-production-b9b8.up.railway.app";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,5 +29,5 @@ app.use("/api/transactions", transactionRoutes);
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on ${process.env.BACKEND_API_URL}`);
+  console.log(`Server running on ${API_BASE_URL}`);
 });

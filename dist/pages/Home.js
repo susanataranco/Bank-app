@@ -8,6 +8,7 @@ import { useToast } from "../hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "../components/ui/select";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://bank-app-production-b9b8.up.railway.app";
 const Home = () => {
     const fetchData = useFetch();
     const { isLoading, setIsLoading } = useLoading();
@@ -20,9 +21,6 @@ const Home = () => {
     const [toAccountId, setToAccountId] = useState("");
     const [balance, setBalance] = useState(null);
     const { user } = useUser();
-    const BACKEND_API_URL = process.env.NODE_ENV === "production"
-        ? "bank-app-production-b9b8.up.railway.app"
-        : "http://localhost:5000";
     // Fetch account ID
     useEffect(() => {
         if (user?.primaryEmailAddress?.emailAddress) {
@@ -56,7 +54,7 @@ const Home = () => {
             const fetchTransactions = async () => {
                 setIsLoading(true);
                 try {
-                    const transactionsData = await fetchData(`${process.env.BACKEND_API_URL}/api/transactions/${accountId}`);
+                    const transactionsData = await fetchData(`${API_BASE_URL}/api/transactions/${accountId}`);
                     setTransactions(transactionsData);
                 }
                 catch (err) {
@@ -75,7 +73,7 @@ const Home = () => {
             const fetchBalance = async () => {
                 setIsLoading(true);
                 try {
-                    const response = await fetchData(`${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`);
+                    const response = await fetchData(`${API_BASE_URL}/api/users/${accountId}/balance`);
                     setBalance(response.balance);
                 }
                 catch (err) {
@@ -103,7 +101,7 @@ const Home = () => {
         }
         setIsLoading(true);
         try {
-            const response = await fetch(`${process.env.BACKEND_API_URL}/api/transactions`, {
+            const response = await fetch(`${API_BASE_URL}/api/transactions`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -125,7 +123,7 @@ const Home = () => {
             });
             setTransactions((prev) => [newTransaction, ...prev]);
             // refetch balance
-            const balanceResponse = await fetch(`${process.env.BACKEND_API_URL}/api/users/${accountId}/balance`);
+            const balanceResponse = await fetch(`${API_BASE_URL}/api/users/${accountId}/balance`);
             const balanceData = await balanceResponse.json();
             setBalance(balanceData.balance);
             setAmount("");

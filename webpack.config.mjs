@@ -39,7 +39,7 @@ export default {
     }),
     new Dotenv(),
     new webpack.DefinePlugin({
-      "process.env.BACKEND_API_URL": JSON.stringify(process.env.BACKEND_API_URL),
+      "process.env.NEXT_PUBLIC_BACKEND_API_URL": JSON.stringify(process.env.NEXT_PUBLIC_BACKEND_API_URL),
     }),
   ],
   devServer: {

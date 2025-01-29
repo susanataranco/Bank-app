@@ -1,9 +1,10 @@
 
-  
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://bank-app-production-b9b8.up.railway.app";
+
 export async function fetchAccountId(email: string, clerkId: string, setIsLoading: (loading: boolean) => void): Promise<number | null> {
   try {
     setIsLoading(true);
-    const response = await fetch(`${process.env.BACKEND_API_URL}/api/users`, {
+    const response = await fetch(`${API_BASE_URL}/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
