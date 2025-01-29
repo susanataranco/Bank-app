@@ -12,7 +12,7 @@ export default {
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "frontend-dist"),
-    filename: "[name].[contenthash].js", 
+    filename: "[name].[contenthash].js",
     publicPath: "/", 
     clean: true,
   },
@@ -43,7 +43,7 @@ export default {
   devServer: {
     static: path.join(__dirname, "frontend-dist"),
     port: 3000,
-    historyApiFallback: true, 
+    historyApiFallback: true,
     host: "0.0.0.0",
     allowedHosts: "all",
   },
