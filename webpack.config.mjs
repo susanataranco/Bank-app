@@ -15,7 +15,7 @@ export default {
     filename: "[name].[contenthash].js", // 🔥 Unique filenames to prevent conflicts
     publicPath: "./",
     clean: true,
-  },  
+  },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
