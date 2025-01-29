@@ -38,6 +38,9 @@ export default {
       filename: "index.html",
     }),
     new Dotenv(),
+    new webpack.DefinePlugin({
+      "process.env.BACKEND_API_URL": JSON.stringify(process.env.BACKEND_API_URL),
+    }),
   ],
   devServer: {
     static: path.join(__dirname, "frontend-dist"),
