@@ -10,9 +10,9 @@ export default {
   mode: "production",
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "frontend-dist"), // ✅ Ensure all files go into frontend-dist
-    filename: "[name].[contenthash].js", // ✅ Cache-busting filenames
-    publicPath: "/", // ✅ Important for routing
+    path: path.resolve(__dirname, "frontend-dist"), 
+    filename: "[name].[contenthash].js", 
+    publicPath: "./", 
     clean: true,
   },
   resolve: {
@@ -42,7 +42,7 @@ export default {
   devServer: {
     static: path.join(__dirname, "frontend-dist"),
     port: 3000,
-    historyApiFallback: true, // ✅ Ensures React Router works
+    historyApiFallback: true, 
     host: "0.0.0.0",
     allowedHosts: "all",
   },
