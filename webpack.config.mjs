@@ -12,7 +12,7 @@ export default {
   output: {
     path: path.resolve(__dirname, "frontend-dist"), 
     filename: "[name].[contenthash].js", 
-    publicPath: "./", 
+    publicPath: "/", 
     clean: true,
   },
   resolve: {
