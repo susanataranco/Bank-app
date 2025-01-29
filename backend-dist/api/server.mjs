@@ -9,19 +9,40 @@ const allowedOrigins = [
     "https://bank-app-gamma-three.vercel.app",
     "https://bank-app-production-b9b8.up.railway.app"
 ];
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://bank-app-production-b9b8.up.railway.app";
 const app = express();
 const PORT = process.env.PORT || 5000;
-// Middleware
+// ✅ Middleware
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url} from ${req.headers.origin}`);
+    next();
+});
 app.use(cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            console.error(`Blocked by CORS: ${origin}`);
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ Ensure OPTIONS is allowed
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
 }));
+// ✅ Explicitly handle preflight `OPTIONS` requests
+app.options("*", (req, res) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.sendStatus(200);
+});
+// ✅ Middleware for parsing JSON requests
 app.use(bodyParser.json());
-// Routes
+// ✅ Routes
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
-// Start Server
+// ✅ Start Server
 app.listen(PORT, () => {
-    console.log(`Server running on ${API_BASE_URL}`);
+    console.log(`Server running on port ${PORT}`);
 });
