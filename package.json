@@ -7,7 +7,7 @@
     "clean": "rm -rf dist/ frontend-dist/ backend-dist/",
     "build:frontend": "webpack --config webpack.config.mjs --mode production && mkdir -p frontend-dist && mv dist/* frontend-dist/ || echo 'No frontend files to move'",
     "build:backend": "tsc && mkdir -p backend-dist && mv dist/api backend-dist/ || echo 'No backend files to move'",
-    "start": "npx serve frontend-dist -p 3000"
+    "start": "node backend-dist/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
