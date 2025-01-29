@@ -10,7 +10,11 @@ if (!PUBLISHABLE_KEY) {
     throw new Error("Missing Clerk Publishable Key");
 }
 console.log("Publishable Key:", process.env.CLERK_PUBLISHABLE_KEY);
+console.log("✅ React App Loaded!");
 const rootElement = document.getElementById('root');
+if (!rootElement) {
+    console.error("❌ No root element found!");
+}
 if (rootElement) {
     const root = ReactDOM.createRoot(rootElement);
     root.render(_jsx(React.StrictMode, { children: _jsx(ClerkProvider, { publishableKey: PUBLISHABLE_KEY, afterSignOutUrl: "/sign-in", children: _jsx(LoadingProvider, { children: _jsx(App, {}) }) }) }));

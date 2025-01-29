@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 export default {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: new URL("./dist", import.meta.url).pathname,
     filename: 'bundle.js',
     publicPath: "/",
   },
@@ -37,7 +37,9 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: path.resolve(__dirname, "public/index.html"),
+      inject: "body",
+      filename: "index.html",
     }),
     new Dotenv(),
   ],
