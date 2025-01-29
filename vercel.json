@@ -5,6 +5,6 @@
     { "src": "frontend-dist/(.*)", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" } 
+    { "src": "/(.*)", "dest": "/frontend-dist/index.html" }
   ]
 }

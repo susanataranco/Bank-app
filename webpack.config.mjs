@@ -3,7 +3,6 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import Dotenv from "dotenv-webpack";
 import { fileURLToPath } from "url";
 
-// Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -11,9 +10,9 @@ export default {
   mode: "production",
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "frontend-dist"),
-    filename: "[name].[contenthash].js",
-    publicPath: "/", 
+    path: path.resolve(__dirname, "frontend-dist"), // ✅ Ensure all files go into frontend-dist
+    filename: "[name].[contenthash].js", // ✅ Cache-busting filenames
+    publicPath: "/", // ✅ Important for routing
     clean: true,
   },
   resolve: {
@@ -43,9 +42,8 @@ export default {
   devServer: {
     static: path.join(__dirname, "frontend-dist"),
     port: 3000,
-    historyApiFallback: true,
+    historyApiFallback: true, // ✅ Ensures React Router works
     host: "0.0.0.0",
     allowedHosts: "all",
   },
 };
-
