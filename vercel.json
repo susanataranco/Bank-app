@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "outputDirectory": "frontend-dist",
   "builds": [
-    { "src": "frontend-dist/index.html", "use": "@vercel/static" },
-    { "src": "frontend-dist/(.*)", "use": "@vercel/static" }
+    { "src": "frontend-dist/**", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/(.*)\\.(js|css|png|jpg|svg|ico|json|woff|woff2|ttf|eot|otf|mp4|webm|mp3|wav|ogg|m4a|aac|oga)$", "dest": "/frontend-dist/$1.$2" },
