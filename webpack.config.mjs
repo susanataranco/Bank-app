@@ -8,12 +8,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: "./src/index.tsx",
+  mode: "production", // ✅ Ensure it's set correctly
+  entry: "./src/index.tsx", // ✅ Entry point for React
   output: {
-    path: path.resolve(__dirname, "frontend-dist"), // ✅ Output only frontend here
+    path: path.resolve(__dirname, "dist"), // ✅ Webpack output location
     filename: "bundle.js",
     publicPath: "/",
-    clean: true,
+    clean: true, // ✅ Ensures old files are removed
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
@@ -33,14 +34,14 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public/index.html"),
+      template: path.resolve(__dirname, "public/index.html"), // ✅ Ensure this file exists
       inject: "body",
       filename: "index.html",
     }),
     new Dotenv(),
   ],
   devServer: {
-    static: path.join(__dirname, "frontend-dist"),
+    static: path.join(__dirname, "dist"),
     port: 3000,
     historyApiFallback: true,
     host: "0.0.0.0",

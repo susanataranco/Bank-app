@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "clean": "rm -rf dist/ frontend-dist/ backend-dist/",
-    "build:frontend": "webpack --config webpack.config.mjs --mode production && mkdir -p frontend-dist && mv dist/* frontend-dist/",
-    "build:backend": "tsc && mkdir -p backend-dist && mv dist/api backend-dist/",
-    "build": "npm run clean && npm run build:frontend && npm run build:backend"
-  },
+  "clean": "rm -rf dist/ frontend-dist/ backend-dist/",
+  "build:frontend": "webpack --config webpack.config.mjs --mode production && mkdir -p frontend-dist && mv dist/* frontend-dist/ || echo 'No frontend files to move'",
+  "build:backend": "tsc && mkdir -p backend-dist && mv dist/api backend-dist/ || echo 'No backend files to move'",
+  "build": "npm run clean && npm run build:frontend && npm run build:backend"
+},
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
