@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "NODE_OPTIONS='--max-old-space-size=1024' tsc && node dist/api/server.mjs",
-    "start:frontend": "NODE_OPTIONS='--max-old-space-size=1024' webpack serve --config webpack.config.mjs --mode development",
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' npm run build:frontend && npm run build:backend",
-    "build:frontend": "webpack --config webpack.config.mjs --mode production",
-    "build:backend": "tsc",
-    "test": "cypress run"
+    "clean": "rm -rf dist/ frontend-dist/ backend-dist/",
+    "build:frontend": "webpack --config webpack.config.mjs --mode production && mkdir -p frontend-dist && mv dist/* frontend-dist/",
+    "build:backend": "tsc && mkdir -p backend-dist && mv dist/api backend-dist/",
+    "build": "npm run clean && npm run build:frontend && npm run build:backend"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

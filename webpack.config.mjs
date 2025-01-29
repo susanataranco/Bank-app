@@ -1,37 +1,33 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import Dotenv from 'dotenv-webpack';
-import { fileURLToPath } from 'url';
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import Dotenv from "dotenv-webpack";
+import { fileURLToPath } from "url";
 
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: './src/index.tsx',
+  entry: "./src/index.tsx",
   output: {
-    path: new URL("./dist", import.meta.url).pathname,
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "frontend-dist"), // ✅ Output only frontend here
+    filename: "bundle.js",
     publicPath: "/",
+    clean: true,
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: [".ts", ".tsx", ".js"],
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'ts-loader',
-          options: {
-            logLevel: 'info',
-          },
-        },
+        use: "ts-loader",
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
@@ -44,7 +40,7 @@ export default {
     new Dotenv(),
   ],
   devServer: {
-    static: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, "frontend-dist"),
     port: 3000,
     historyApiFallback: true,
     host: "0.0.0.0",
