@@ -11,9 +11,9 @@ export default {
   mode: "production",
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "frontend-dist"), // ✅ Ensures output goes to the correct folder
-    filename: "[name].[contenthash].js", // 🔥 Unique filenames to prevent conflicts
-    publicPath: "./",
+    path: path.resolve(__dirname, "frontend-dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "/",
     clean: true,
   },
   resolve: {
