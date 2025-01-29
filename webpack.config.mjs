@@ -11,7 +11,7 @@ export default {
   mode: "production",
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "frontend-dist"), // ✅ Direct output to frontend-dist
     filename: "bundle.js",
     publicPath: "/",
     clean: true,
@@ -41,10 +41,16 @@ export default {
     new Dotenv(),
   ],
   devServer: {
-    static: path.join(__dirname, "dist"),
+    static: path.join(__dirname, "frontend-dist"),
     port: 3000,
     historyApiFallback: true,
     host: "0.0.0.0",
     allowedHosts: "all",
+  },
+  optimization: {
+    usedExports: true, // Remove unused exports
+    splitChunks: {
+      chunks: "all", // Automatically split large bundles
+    },
   },
 };
