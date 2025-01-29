@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "public": "frontend-dist",
   "builds": [
     { "src": "frontend-dist/index.html", "use": "@vercel/static" },
     { "src": "frontend-dist/(.*)", "use": "@vercel/static" }
