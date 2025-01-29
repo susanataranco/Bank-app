@@ -8,13 +8,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  mode: "production", // ✅ Ensure it's set correctly
-  entry: "./src/index.tsx", // ✅ Entry point for React
+  mode: "production",
+  entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "dist"), // ✅ Webpack output location
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     publicPath: "/",
-    clean: true, // ✅ Ensures old files are removed
+    clean: true,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
@@ -34,7 +34,7 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public/index.html"), // ✅ Ensure this file exists
+      template: path.resolve(__dirname, "public/index.html"),
       inject: "body",
       filename: "index.html",
     }),
