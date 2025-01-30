@@ -6,7 +6,7 @@
     "build": "npm run clean && npm run build:frontend && npm run build:backend",
     "clean": "rm -rf dist/ frontend-dist/ backend-dist/",
     "build:frontend": "webpack --config webpack.config.mjs --mode production && mkdir -p frontend-dist && mv dist/* frontend-dist/ || echo 'No frontend files to move'",
-    "build:backend": "tsc && mkdir -p backend-dist && mv dist/* backend-dist/ && mv backend-dist/api/server.mjs backend-dist/ || echo 'No backend files to move'",
+    "build:backend": "tsc -p tsconfig.backend.json",
     "start": "node backend-dist/server.mjs"
   },
   "devDependencies": {

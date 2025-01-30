@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
-import { generateCustomUserId } from "../../utils/generateCustomUserId.js";
+import { generateCustomUserId } from "../utils/generateCustomUserId.js";
 const router = Router();
 const prisma = new PrismaClient();
 // Create or fetch a user
